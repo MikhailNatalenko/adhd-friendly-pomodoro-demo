@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Timer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Pomodoro Timer</h1>
+        <div class="options">
+            <button id="pomodoro25">25 минут</button>
+            <button id="pomodoro20">20 минут</button>
+            <button id="pomodoro15">15 минут</button>
+            <button id="pomodoro5">5 минут</button>
+            <button id="pomodoroDebug">10 секунд</button>
+        </div>
+        <div id="timer">00:00</div>
+        <button id="startStop">Старт</button>
+    </div>
+    <audio id="alertSound" src="ring.wav"></audio>
+    <script src="script.js"></script>
+</body>
+</html>
