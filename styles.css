@@ -23,8 +23,8 @@ button {
     margin-bottom: 20px;
 }
 
-#startStop {
-    background-color: #4CAF50;
+#cancelTimer {
+    background-color: #af4c54;
     color: white;
     border: none;
     padding: 10px 20px;
