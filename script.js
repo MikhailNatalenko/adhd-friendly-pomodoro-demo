@@ -10,17 +10,14 @@ let timerInterval;
 let audioContext = new AudioContext();
 let alertSoundBuffer;
 let alertInterval;
-let volume = 0.5; // Изначальное значение громкости
+let volume = 0.5; // Initial volume level
 
-// Получаем элемент управления громкостью
-let volumeRange = document.getElementById('volumeRange');
-
-// Функция для сохранения уровня громкости в куки
+// Function to save volume level to cookie
 function saveVolumeToCookie(volume) {
     document.cookie = `volume=${volume};expires=Fri, 31 Dec 9999 23:59:59 GMT;path=/`;
 }
 
-// Функция для получения уровня громкости из куки
+// Function to get volume level from cookie
 function getVolumeFromCookie() {
     const cookies = document.cookie.split(';');
     for (let i = 0; i < cookies.length; i++) {
@@ -32,22 +29,22 @@ function getVolumeFromCookie() {
     return null;
 }
 
-// Загрузка звукового файла
+// Loading the sound file
 fetch('ring.wav')
     .then(response => response.arrayBuffer())
     .then(arrayBuffer => audioContext.decodeAudioData(arrayBuffer))
     .then(audioBuffer => {
         alertSoundBuffer = audioBuffer;
     })
-    .catch(error => console.error('Ошибка загрузки звукового файла:', error));
+    .catch(error => console.error('Error loading sound file:', error));
 
-// Функция для проигрывания звука
+// Function to play the alert sound
 function playAlertSound() {
     if (!alertSoundBuffer) return;
     let source = audioContext.createBufferSource();
     source.buffer = alertSoundBuffer;
 
-    // Применяем уровень громкости
+    // Apply volume level
     let gainNode = audioContext.createGain();
     gainNode.gain.value = volume;
     source.connect(gainNode);
@@ -57,11 +54,12 @@ function playAlertSound() {
 }
 
 function startTimer(seconds) {
-    clearInterval(timerInterval); // Остановка предыдущего интервала, если он есть
-    clearInterval(alertInterval); // Остановка предыдущего интервала звукового сигнала
+    clearInterval(timerInterval); // Stop previous interval, if any
+    clearInterval(alertInterval); // Stop previous alert interval
+
     let endTime = Date.now() + seconds * 1000;
     timeLeft = seconds;
-    
+
     console.log('Timer started:', seconds, 'seconds');
     timerState = TimerState.RUNNING;
     updateCancelButtonState()
@@ -76,13 +74,13 @@ function startTimer(seconds) {
         let timeRemaining = endTime - Date.now();
         if (timeRemaining <= 0) {
             clearInterval(timerInterval);
-            playAlertSound(); // Проигрываем звук по истечении времени
+            playAlertSound(); // Play sound when time is up
             console.log('Time is up');
             if (document.visibilityState === 'visible') {
-                pauseTimer(); // Переводим таймер в состояние STOPPED, если страница видима
+                pauseTimer(); // Change timer state to STOPPED if page is visible
             } else {
-                alertInterval = setInterval(playAlertSound, 30 * 1000); // Ставим интервал на 30 секунд
-                timerState = TimerState.WAITING_FOR_STOP; // Переходим в состояние ожидания остановки
+                alertInterval = setInterval(playAlertSound, 30 * 1000); // Set interval for every 30 seconds
+                timerState = TimerState.WAITING_FOR_STOP; // Change state to waiting for stop
                 console.log('Timer state:', timerState);
             }
             return;
@@ -110,7 +108,7 @@ function updateCancelButtonState() {
 
 function pauseTimer() {
     clearInterval(timerInterval);
-    clearInterval(alertInterval); // Остановка звукового сигнала
+    clearInterval(alertInterval); // Stop sound alert
     timerState = TimerState.STOPPED;
     console.log('Timer paused');
     console.log('Timer state:', timerState);
@@ -137,32 +135,32 @@ document.getElementById('pomodoroDebug').addEventListener('click', function () {
     startTimer(10);
 });
 
-// Обработчик события изменения видимости страницы
+// Event listener for visibility change
 document.addEventListener('visibilitychange', function() {
     if (document.visibilityState === 'visible' && timerState === TimerState.WAITING_FOR_STOP) {
-        pauseTimer(); // При возвращении на вкладку переводим таймер в состояние STOPPED
+        pauseTimer(); // Change timer state to STOPPED when returning to tab
         console.log('Timer state:', timerState);
     }
     console.log('Visibility changed:', document.visibilityState);
 });
 
-// При загрузке страницы устанавливаем уровень громкости из куки, если он есть
+// Set volume level from cookie on page load, if available
 window.addEventListener('load', function() {
     const savedVolume = getVolumeFromCookie();
     if (savedVolume !== null) {
         volumeRange.value = savedVolume;
         volume = parseFloat(savedVolume);
-        // Применяем уровень громкости
+        // Apply volume level
         playAlertSound();
     }
 });
 
-// Обработчик изменения уровня громкости
+// Event listener for volume level change
 volumeRange.addEventListener('change', function() {
     volume = parseFloat(this.value);
-    // Проигрываем звук для проверки громкости
+    // Play sound for volume check
     playAlertSound();
-    // Сохраняем уровень громкости в куки
+    // Save volume level to cookie
     saveVolumeToCookie(this.value);
     console.log('Volume changed:', volume);
 });
@@ -179,7 +177,7 @@ function addToLog(duration) {
     const startTimeString = `${startDate.getHours()}:${startDate.getMinutes()}:${startDate.getSeconds()}`;
     const durationMinutes = Math.floor(duration / 60);
 
-    listItem.textContent = `Таймер запущен в ${startTimeString} на ${durationMinutes} минут`;
+    listItem.textContent = `Timer started at ${startTimeString} for ${durationMinutes} minutes`;
     log.appendChild(listItem);
 
     // Удаляем старые записи, если превышено количество строк

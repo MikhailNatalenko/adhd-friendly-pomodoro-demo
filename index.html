@@ -7,22 +7,24 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <h1>Pomodoro Timer</h1>
+    <p class="contribute-message">Contributions welcome! <a href="https://github.com/MikhailNatalenko/adhd-friendly-pomodoro-demo" style="color: gray;">Contribute on GitHub</a>.</p>
     <div class="container">
-        <h1>Pomodoro Timer</h1>
+        <h2>Pomodoro Timer</h2>
         <div class="options">
-            <button id="pomodoro25" data-duration="25">25 минут</button>
-            <button id="pomodoro20" data-duration="20">20 минут</button>
-            <button id="pomodoro15" data-duration="15">15 минут</button>
-            <button id="pomodoro5" data-duration="5">5 минут</button>
-            <button id="pomodoroDebug" data-duration="10">10 секунд (debug)</button>
+            <button id="pomodoro25" data-duration="25">25 minutes</button>
+            <button id="pomodoro20" data-duration="20">20 minutes</button>
+            <button id="pomodoro15" data-duration="15">15 minutes</button>
+            <button id="pomodoro5" data-duration="5">5 minutes</button>
+            <button id="pomodoroDebug" data-duration="10">10 seconds (debug)</button>
         </div>
         <div>
-            <label for="volumeRange">Громкость:</label>
+            <label for="volumeRange">Volume:</label>
             <input type="range" id="volumeRange" min="0" max="1" step="0.1" value="1">
         </div>
         <div id="timer">00:00</div>
-        <button id="cancelTimer">Отмена</button>
-        <ul id="log"></ul>
+        <button id="cancelTimer" disabled>Cancel</button>
+        <div id="log" class="log"></div>
     </div>
 
     <audio id="alertSound" src="ring.wav"></audio>

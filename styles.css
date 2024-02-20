@@ -18,6 +18,11 @@ button {
     cursor: pointer;
 }
 
+.contribute-message {
+    font-size: smaller;
+    color: gray;
+}
+
 #timer {
     font-size: 36px;
     margin-bottom: 20px;
