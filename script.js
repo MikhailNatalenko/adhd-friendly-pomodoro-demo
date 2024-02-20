@@ -65,6 +65,7 @@ function startTimer(seconds) {
 
     console.log('Timer started:', seconds, 'seconds');
     timerState = TimerState.RUNNING;
+    addToLog(seconds)
     console.log('Timer state:', timerState);
 
     updateTimer();
@@ -161,3 +162,20 @@ volumeRange.addEventListener('change', function() {
 document.getElementById('cancelTimer').addEventListener('click', function () {
     pauseTimer();
 });
+
+function addToLog(duration) {
+    const log = document.getElementById('log');
+    const listItem = document.createElement('li');
+
+    const startDate = new Date();
+    const startTimeString = `${startDate.getHours()}:${startDate.getMinutes()}:${startDate.getSeconds()}`;
+    const durationMinutes = Math.floor(duration / 60);
+
+    listItem.textContent = `Таймер запущен в ${startTimeString} на ${durationMinutes} минут`;
+    log.appendChild(listItem);
+
+    // Удаляем старые записи, если превышено количество строк
+    if (log.children.length > 15) {
+        log.removeChild(log.firstChild);
+    }
+}
