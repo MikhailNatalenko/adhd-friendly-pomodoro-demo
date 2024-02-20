@@ -43,19 +43,8 @@ function startTimer(seconds) {
         let timeRemaining = endTime - Date.now();
         if (timeRemaining <= 0) {
             clearInterval(timerInterval);
-            timerDisplay.textContent = "00:00";
-            playAlertSound();
-            //alert("Время вышло!");
-
-            // Воспроизводим звук каждые 30 секунд, пока страница невидима
-            alertInterval = setInterval(function() {
-                if (document.visibilityState === 'visible') {
-                    clearInterval(alertInterval);
-                } else {
-                    playAlertSound();
-                }
-            }, 30000);
-
+            clearInterval(alertInterval); // Останавливаем интервал звукового сигнала
+            playAlertSound(); // Проигрываем звук по истечении времени
             return;
         }
 
@@ -106,4 +95,7 @@ document.addEventListener('visibilitychange', function() {
 // Обработчик изменения уровня громкости
 volumeRange.addEventListener('change', function() {
     volume = parseFloat(this.value);
+    
+    // Проигрываем звук для проверки громкости
+    playAlertSound();
 });
