@@ -10,10 +10,27 @@ let timerInterval;
 let audioContext = new AudioContext();
 let alertSoundBuffer;
 let alertInterval;
+let volume = 0.5; // Изначальное значение громкости
 
 // Получаем элемент управления громкостью
 let volumeRange = document.getElementById('volumeRange');
-let volume = parseFloat(volumeRange.value); // Изначальное значение громкости
+
+// Функция для сохранения уровня громкости в куки
+function saveVolumeToCookie(volume) {
+    document.cookie = `volume=${volume};expires=Fri, 31 Dec 9999 23:59:59 GMT;path=/`;
+}
+
+// Функция для получения уровня громкости из куки
+function getVolumeFromCookie() {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.startsWith('volume=')) {
+            return cookie.substring('volume='.length, cookie.length);
+        }
+    }
+    return null;
+}
 
 // Загрузка звукового файла
 fetch('ring.wav')
@@ -24,6 +41,7 @@ fetch('ring.wav')
     })
     .catch(error => console.error('Ошибка загрузки звукового файла:', error));
 
+// Функция для проигрывания звука
 function playAlertSound() {
     if (!alertSoundBuffer) return;
     let source = audioContext.createBufferSource();
@@ -119,16 +137,27 @@ document.addEventListener('visibilitychange', function() {
     console.log('Visibility changed:', document.visibilityState);
 });
 
+// При загрузке страницы устанавливаем уровень громкости из куки, если он есть
+window.addEventListener('load', function() {
+    const savedVolume = getVolumeFromCookie();
+    if (savedVolume !== null) {
+        volumeRange.value = savedVolume;
+        volume = parseFloat(savedVolume);
+        // Применяем уровень громкости
+        playAlertSound();
+    }
+});
+
 // Обработчик изменения уровня громкости
 volumeRange.addEventListener('change', function() {
     volume = parseFloat(this.value);
-    
     // Проигрываем звук для проверки громкости
     playAlertSound();
-
+    // Сохраняем уровень громкости в куки
+    saveVolumeToCookie(this.value);
     console.log('Volume changed:', volume);
 });
 
 document.getElementById('cancelTimer').addEventListener('click', function () {
-    pauseTimer()
+    pauseTimer();
 });
