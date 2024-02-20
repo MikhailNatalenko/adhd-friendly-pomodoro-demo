@@ -59,12 +59,12 @@ function playAlertSound() {
 function startTimer(seconds) {
     clearInterval(timerInterval); // Остановка предыдущего интервала, если он есть
     clearInterval(alertInterval); // Остановка предыдущего интервала звукового сигнала
-
     let endTime = Date.now() + seconds * 1000;
     timeLeft = seconds;
-
+    
     console.log('Timer started:', seconds, 'seconds');
     timerState = TimerState.RUNNING;
+    updateCancelButtonState()
     addToLog(seconds)
     console.log('Timer state:', timerState);
 
@@ -101,12 +101,20 @@ function startTimer(seconds) {
     }
 }
 
+
+function updateCancelButtonState() {
+    const cancelButton = document.getElementById('cancelTimer');
+    cancelButton.disabled = (timerState === TimerState.STOPPED);
+}
+
+
 function pauseTimer() {
     clearInterval(timerInterval);
     clearInterval(alertInterval); // Остановка звукового сигнала
     timerState = TimerState.STOPPED;
     console.log('Timer paused');
     console.log('Timer state:', timerState);
+    updateCancelButtonState(); // Обновляем состояние кнопки "Отмена"
 }
 
 document.getElementById('pomodoro25').addEventListener('click', function () {
@@ -179,3 +187,6 @@ function addToLog(duration) {
         log.removeChild(log.firstChild);
     }
 }
+
+
+updateCancelButtonState(); // Устанавливаем состояние кнопки "Отмена" при загрузке страницы

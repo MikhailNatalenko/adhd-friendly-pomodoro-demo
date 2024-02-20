@@ -35,6 +35,11 @@ button {
     margin: 4px 2px;
     cursor: pointer;
 }
+#cancelTimer:disabled {
+    background-color: #ccc; /* Цвет фона для отключенной кнопки */
+    color: #666; /* Цвет текста для отключенной кнопки */
+    cursor: not-allowed; /* Изменение указателя мыши для отключенной кнопки */
+}
 
 #log {
     max-height: calc(1.2em * 20); /* Высота для 20 строк */
