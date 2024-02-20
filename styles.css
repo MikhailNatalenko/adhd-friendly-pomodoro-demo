@@ -35,3 +35,14 @@ button {
     margin: 4px 2px;
     cursor: pointer;
 }
+
+#log {
+    max-height: calc(1.2em * 20); /* Высота для 20 строк */
+    overflow-y: auto; /* Включить вертикальный скроллинг, если контент превышает максимальную высоту */
+    background-color: #f9f9f9; /* Цвет фона */
+    border: 1px solid #ddd; /* Граница */
+    padding: 10px; /* Внутренний отступ */
+    margin-top: 20px; /* Внешний отступ сверху */
+    margin-left: 20px; /* Отступ слева */
+    margin-right: 20px; /* Отступ справа */
+}
