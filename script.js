@@ -4,6 +4,10 @@ let audioContext = new AudioContext();
 let alertSoundBuffer;
 let alertInterval; // Объявляем переменную для интервала звукового сигнала
 
+// Получаем элемент управления громкостью
+let volumeRange = document.getElementById('volumeRange');
+let volume = parseFloat(volumeRange.value); // Изначальное значение громкости
+
 // Загрузка звукового файла
 fetch('ring.wav')
     .then(response => response.arrayBuffer())
@@ -17,7 +21,13 @@ function playAlertSound() {
     if (!alertSoundBuffer) return;
     let source = audioContext.createBufferSource();
     source.buffer = alertSoundBuffer;
-    source.connect(audioContext.destination);
+    
+    // Применяем уровень громкости
+    let gainNode = audioContext.createGain();
+    gainNode.gain.value = volume;
+    source.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
     source.start(0);
 }
 
@@ -86,10 +96,14 @@ document.getElementById('cancelTimer').addEventListener('click', function () {
     timerDisplay.textContent = "00:00";
 });
 
-
 // Обработчик события изменения видимости страницы
 document.addEventListener('visibilitychange', function() {
     if (document.visibilityState === 'visible') {
         clearInterval(alertInterval); // Остановка интервала звукового сигнала
     }
+});
+
+// Обработчик изменения уровня громкости
+volumeRange.addEventListener('change', function() {
+    volume = parseFloat(this.value);
 });
