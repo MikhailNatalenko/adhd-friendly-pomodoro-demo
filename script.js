@@ -84,6 +84,7 @@ function startTimer(seconds) {
 
 function pauseTimer() {
     clearInterval(timerInterval);
+    clearInterval(alertInterval); // Остановка звукового сигнала
     timerState = TimerState.STOPPED;
     console.log('Timer paused');
     console.log('Timer state:', timerState);
@@ -129,9 +130,5 @@ volumeRange.addEventListener('change', function() {
 });
 
 document.getElementById('cancelTimer').addEventListener('click', function () {
-    clearInterval(timerInterval); // Остановка таймера
-    clearInterval(alertInterval); // Остановка звукового сигнала
-    timerState = TimerState.STOPPED; // Переводим стейт в STOPPED
-    console.log('Timer canceled');
-    console.log('Timer state:', timerState);
+    pauseTimer()
 });
