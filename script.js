@@ -45,22 +45,26 @@ function startTimer(seconds) {
     let endTime = Date.now() + seconds * 1000;
     timeLeft = seconds;
 
+    console.log('Timer started:', seconds, 'seconds');
+    timerState = TimerState.RUNNING;
+    console.log('Timer state:', timerState);
+
     updateTimer();
 
     timerInterval = setInterval(updateTimer, 1000);
-
-    timerState = TimerState.RUNNING;
 
     function updateTimer() {
         let timeRemaining = endTime - Date.now();
         if (timeRemaining <= 0) {
             clearInterval(timerInterval);
             playAlertSound(); // Проигрываем звук по истечении времени
+            console.log('Time is up');
             if (document.visibilityState === 'visible') {
                 pauseTimer(); // Переводим таймер в состояние STOPPED, если страница видима
             } else {
                 alertInterval = setInterval(playAlertSound, 30 * 1000); // Ставим интервал на 30 секунд
                 timerState = TimerState.WAITING_FOR_STOP; // Переходим в состояние ожидания остановки
+                console.log('Timer state:', timerState);
             }
             return;
         }
@@ -73,12 +77,16 @@ function startTimer(seconds) {
 
         let timerDisplay = document.getElementById('timer');
         timerDisplay.textContent = minutes + ":" + seconds;
+
+        console.log('Time left:', minutes, 'minutes', seconds, 'seconds');
     }
 }
 
 function pauseTimer() {
     clearInterval(timerInterval);
     timerState = TimerState.STOPPED;
+    console.log('Timer paused');
+    console.log('Timer state:', timerState);
 }
 
 document.getElementById('pomodoro25').addEventListener('click', function () {
@@ -105,7 +113,9 @@ document.getElementById('pomodoroDebug').addEventListener('click', function () {
 document.addEventListener('visibilitychange', function() {
     if (document.visibilityState === 'visible' && timerState === TimerState.WAITING_FOR_STOP) {
         pauseTimer(); // При возвращении на вкладку переводим таймер в состояние STOPPED
+        console.log('Timer state:', timerState);
     }
+    console.log('Visibility changed:', document.visibilityState);
 });
 
 // Обработчик изменения уровня громкости
@@ -114,4 +124,14 @@ volumeRange.addEventListener('change', function() {
     
     // Проигрываем звук для проверки громкости
     playAlertSound();
+
+    console.log('Volume changed:', volume);
+});
+
+document.getElementById('cancelTimer').addEventListener('click', function () {
+    clearInterval(timerInterval); // Остановка таймера
+    clearInterval(alertInterval); // Остановка звукового сигнала
+    timerState = TimerState.STOPPED; // Переводим стейт в STOPPED
+    console.log('Timer canceled');
+    console.log('Timer state:', timerState);
 });
