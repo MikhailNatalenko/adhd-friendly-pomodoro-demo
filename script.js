@@ -4,6 +4,12 @@ const TimerState = {
     WAITING_FOR_STOP: 'WAITING_FOR_STOP'
 };
 
+// Array of available colors
+const colors = ['#FFFFCC', '#CCFFFF', '#FFE5CC', '#CCFFE5', '#FFFFE5'];
+
+let colorIndex = 0; // Index of the current color
+
+
 let timerState = TimerState.STOPPED;
 let timeLeft = 0;
 let timerInterval;
@@ -171,19 +177,22 @@ document.getElementById('cancelTimer').addEventListener('click', function () {
 
 function addToLog(duration) {
     const log = document.getElementById('log');
-    const listItem = document.createElement('li');
+    const listItem = document.createElement('div');
 
     const startDate = new Date();
     const startTimeString = `${startDate.getHours()}:${startDate.getMinutes()}:${startDate.getSeconds()}`;
     const durationMinutes = Math.floor(duration / 60);
 
+    listItem.style.backgroundColor = colors[colorIndex]; // Set background color from the array
+
+
     listItem.textContent = `Timer started at ${startTimeString} for ${durationMinutes} minutes`;
     log.appendChild(listItem);
+    log.scrollTop = log.scrollHeight;
 
-    // Удаляем старые записи, если превышено количество строк
-    if (log.children.length > 15) {
-        log.removeChild(log.firstChild);
-    }
+    // Increase the color index to choose the next color from the array
+    colorIndex = (colorIndex + 1) % colors.length;
+
 }
 
 
