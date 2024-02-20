@@ -118,6 +118,8 @@ function pauseTimer() {
     timerState = TimerState.STOPPED;
     console.log('Timer paused');
     console.log('Timer state:', timerState);
+    let timerDisplay = document.getElementById('timer');
+    timerDisplay.textContent = "00:00";
     updateCancelButtonState(); // Обновляем состояние кнопки "Отмена"
 }
 
