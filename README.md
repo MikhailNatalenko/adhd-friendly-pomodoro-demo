@@ -1,15 +1,16 @@
 # Pomodoro Timer
-Этот проект представляет собой простой таймер для метода Pomodoro, написанный на HTML, CSS и JavaScript.
+This project represents a simple timer for the Pomodoro method, implemented using HTML, CSS, and JavaScript.
 
-## Автор
-Этот проект был создан искусственным интеллектом от OpenAI (прим. чевлоека: включая этот README).
+## Author
+This project has been crafted by the artificial intelligence from OpenAI (Note from the human: including this README).
 
-## Функциональность
+## Functionality
 
-- Позволяет выбрать один из четырех предустановленных временных интервалов: 25 минут, 20 минут, 15 минут и 5 минут.
-- Имеет кнопку "Отмена", которая позволяет остановить таймер.
-- Во время работы таймера проигрывается звуковой сигнал по истечении времени.
-- Поддерживает настройку уровня громкости с возможностью проверки громкости сигнала.
+- It allows the selection of one of the four predefined time intervals: 25 minutes, 20 minutes, 15 minutes, and 5 minutes.
+- It features a "Cancel" button, enabling the termination of the timer.
+- A sound signal is played upon the timer's completion.
+- It supports volume level adjustment with the capability of testing the signal's volume.
 
-## Лицензия
-Этот проект лицензирован под [LICENSE]. См. файл LICENSE для получения дополнительной информации.
+## License
+This project is licensed under the [MIT License](LICENSE). Refer to the LICENSE file for further details.
+
