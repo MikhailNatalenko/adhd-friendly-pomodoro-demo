@@ -57,9 +57,11 @@ button {
     margin-right: 20px; /* Right margin */
 }
 
-/* Скрываем крестик по умолчанию */
+/* Стили для крестика */
 .log span.deleteButton {
     visibility: hidden;
+    color: #999; /* Серый цвет */
+    font-size: 14px; /* Уменьшенный размер */
 }
 
 /* Отображаем крестик при наведении мыши на строку лога */
