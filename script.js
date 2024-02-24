@@ -187,6 +187,7 @@ function addToLog(duration) {
     // Create a delete button (cross symbol) for removing the log entry
     const deleteButton = document.createElement('span');
     deleteButton.textContent = '❌';
+    deleteButton.classList.add('deleteButton'); // Add class to the delete button
     deleteButton.style.cursor = 'pointer';
     deleteButton.style.marginLeft = '5px';
 
@@ -205,6 +206,7 @@ function addToLog(duration) {
     // Increase the color index to choose the next color from the array
     colorIndex = (colorIndex + 1) % colors.length;
 }
+
 
 
 updateCancelButtonState(); // Set cancel button state on page load

@@ -56,3 +56,13 @@ button {
     margin-left: 20px; /* Left margin */
     margin-right: 20px; /* Right margin */
 }
+
+/* Скрываем крестик по умолчанию */
+.log span.deleteButton {
+    visibility: hidden;
+}
+
+/* Отображаем крестик при наведении мыши на строку лога */
+.log div:hover span.deleteButton {
+    visibility: visible;
+}
