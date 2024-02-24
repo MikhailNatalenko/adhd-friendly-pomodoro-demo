@@ -184,12 +184,27 @@ function addToLog(duration) {
 
     listItem.style.backgroundColor = colors[colorIndex]; // Set background color from the array
 
+    // Create a delete button (cross symbol) for removing the log entry
+    const deleteButton = document.createElement('span');
+    deleteButton.textContent = '❌';
+    deleteButton.style.cursor = 'pointer';
+    deleteButton.style.marginLeft = '5px';
+
+    // Add event listener to delete the log entry when the delete button is clicked
+    deleteButton.addEventListener('click', function() {
+        log.removeChild(listItem);
+    });
+
+    // Append the delete button and log text to the log entry
     listItem.textContent = `Timer started at ${startTimeString} for ${durationMinutes} minutes`;
+    listItem.appendChild(deleteButton);
+
     log.appendChild(listItem);
     log.scrollTop = log.scrollHeight;
 
     // Increase the color index to choose the next color from the array
     colorIndex = (colorIndex + 1) % colors.length;
 }
+
 
 updateCancelButtonState(); // Set cancel button state on page load
