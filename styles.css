@@ -41,19 +41,18 @@ button {
     cursor: pointer;
 }
 #cancelTimer:disabled {
-    background-color: #ccc; /* Цвет фона для отключенной кнопки */
-    color: #666; /* Цвет текста для отключенной кнопки */
-    cursor: not-allowed; /* Изменение указателя мыши для отключенной кнопки */
+    background-color: #ccc; /* Background color for disabled button */
+    color: #666; /* Text color for disabled button */
+    cursor: not-allowed; /* Mouse cursor for disabled button */
 }
 
 .log {
-    max-height: calc(1.2em * 20); /* Высота для 20 строк */
-    overflow-y: auto; /* Включить вертикальный скроллинг, если контент превышает максимальную высоту */
-    background-color: #f9f9f9; /* Цвет фона */
-    border: 1px solid #ddd; /* Граница */
-    padding: 10px; /* Внутренний отступ */
-    margin-top: 20px; /* Внешний отступ сверху */
-    margin-left: 20px; /* Отступ слева */
-    margin-right: 20px; /* Отступ справа */
+    max-height: calc(1.2em * 20); /* Height for 20 lines */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds max height */
+    background-color: #f9f9f9; /* Background color */
+    border: 1px solid #ddd; /* Border */
+    padding: 10px; /* Padding */
+    margin-top: 20px; /* Top margin */
+    margin-left: 20px; /* Left margin */
+    margin-right: 20px; /* Right margin */
 }
-
