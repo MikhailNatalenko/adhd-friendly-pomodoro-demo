@@ -57,14 +57,26 @@ button {
     margin-right: 20px; /* Right margin */
 }
 
-/* Стили для крестика */
+/* Styles for the circle */
 .log span.deleteButton {
     visibility: hidden;
-    color: #999; /* Серый цвет */
-    font-size: 14px; /* Уменьшенный размер */
+    position: relative;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: #ff7f7f;
+    text-align: center;
+    line-height: 14px;
+    color: #4b2020;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 10px;
 }
 
-/* Отображаем крестик при наведении мыши на строку лога */
-.log div:hover span.deleteButton {
+/* Display the circle on hover over the cross */
+.log div:hover span.deleteButton  {
     visibility: visible;
 }
+
+

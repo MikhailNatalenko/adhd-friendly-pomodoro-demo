@@ -182,14 +182,12 @@ function addToLog(duration) {
     const startTimeString = `${startDate.getHours()}:${startDate.getMinutes()}:${startDate.getSeconds()}`;
     const durationMinutes = Math.floor(duration / 60);
 
-    listItem.style.backgroundColor = colors[colorIndex]; // Set background color from the array
+    listItem.style.backgroundColor = colors[colorIndex];
 
-    // Create a delete button (cross symbol) for removing the log entry
+    // Create a delete button (circle)
     const deleteButton = document.createElement('span');
-    deleteButton.textContent = 'x';
-    deleteButton.classList.add('deleteButton'); // Add class to the delete button
-    deleteButton.style.cursor = 'pointer';
-    deleteButton.style.marginLeft = '5px';
+    deleteButton.textContent = '×';
+    deleteButton.classList.add('deleteButton');
 
     // Add event listener to delete the log entry when the delete button is clicked
     deleteButton.addEventListener('click', function() {
@@ -206,6 +204,35 @@ function addToLog(duration) {
     // Increase the color index to choose the next color from the array
     colorIndex = (colorIndex + 1) % colors.length;
 }
+
+
+//TODO: reduce copypaste 
+//TODO: delete button is ugly do something with it 
+document.getElementById('addSeparator').addEventListener('click', function() {
+    const log = document.getElementById('log');
+    const listItem = document.createElement('div');
+
+    listItem.style.marginBottom = '5px'; // Add some bottom margin for separation
+
+    // Create a delete button (cross)
+    const deleteButton = document.createElement('span');
+    deleteButton.textContent = '×';
+    deleteButton.classList.add('deleteButton');
+
+    // Add event listener to delete the log entry when the delete button is clicked
+    deleteButton.addEventListener('click', function() {
+        log.removeChild(listItem);
+    });
+
+    // Append the delete button to the empty log entry
+    listItem.appendChild(deleteButton);
+
+    log.appendChild(listItem);
+    log.scrollTop = log.scrollHeight;
+});
+
+
+
 
 
 
