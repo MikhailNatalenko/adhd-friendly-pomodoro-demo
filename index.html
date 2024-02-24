@@ -14,14 +14,33 @@
     <div class="container">
         <h2>Pomodoro Timer</h2>
         <div class="options">
-            <button id="pomodoro25" data-duration="25">25 minutes</button>
-            <button id="pomodoro20" data-duration="20">20 minutes</button>
-            <button id="pomodoro15" data-duration="15">15 minutes</button>
-            <button id="pomodoro5" data-duration="5">5 minutes</button>
-            <button id="pomodoroDebug" data-duration="10">10 seconds (debug)</button>
-            <button id="addSeparator">Add Separator</button>
+            <div>
+                <button id="pomodoro25" data-duration="25">25 minutes</button>
+                <input type="text" id="timerName1" value="Pomodoro 25">
+            </div>
+            <div>
+                <button id="pomodoro20" data-duration="20">20 minutes</button>
+                <input type="text" id="timerName2" value="Pomodoro 20">
+            </div>
+            <div>
+                <button id="pomodoro15" data-duration="15">15 minutes</button>
+                <input type="text" id="timerName3" value="Pomodoro 15">
+            </div>
+            <div>
+                <button id="pomodoro5" data-duration="5">5 minutes</button>
+                <input type="text" id="timerName4" value="Pomodoro 5">
+            </div>
+            <div>
+                <button id="pomodoroDebug" data-duration="10">10 seconds (debug)</button>
+                <input type="text" id="timerName5" value="Debug Timer">
+            </div>
+            <div>
+                <button id="addSeparator">Add Separator</button>
+                <input type="text" id="separatorName" placeholder="Separator Name">
+            </div>
 
         </div>
+        
         <div>
             <label for="volumeRange">Volume:</label>
             <input type="range" id="volumeRange" min="0" max="1" step="0.1" value="1">

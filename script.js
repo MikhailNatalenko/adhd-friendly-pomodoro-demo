@@ -87,7 +87,7 @@ function playAlertSound() {
     source.start(0);
 }
 
-function startTimer(seconds) {
+function startTimer(seconds, timerName) {
     clearInterval(timerInterval); // Stop previous interval, if any
     clearInterval(alertInterval); // Stop previous alert interval
 
@@ -97,7 +97,7 @@ function startTimer(seconds) {
     console.log('Timer started:', seconds, 'seconds');
     timerState = TimerState.RUNNING;
     updState();
-    addToLog(seconds);
+    addToLog(seconds, timerName);
     console.log('Timer state:', timerState);
 
     updateTimer();
@@ -150,24 +150,30 @@ function pauseTimer() {
     updState();
 }
 
+// Modify the event listeners to pass the timer name to the startTimer function
 document.getElementById('pomodoro25').addEventListener('click', function () {
-    startTimer(25 * 60);
+    const timerName = document.getElementById('timerName1').value;
+    startTimer(25 * 60, timerName);
 });
 
 document.getElementById('pomodoro20').addEventListener('click', function () {
-    startTimer(20 * 60);
+    const timerName = document.getElementById('timerName2').value;
+    startTimer(20 * 60, timerName);
 });
 
 document.getElementById('pomodoro15').addEventListener('click', function () {
-    startTimer(15 * 60);
+    const timerName = document.getElementById('timerName3').value;
+    startTimer(15 * 60, timerName);
 });
 
 document.getElementById('pomodoro5').addEventListener('click', function () {
-    startTimer(5 * 60);
+    const timerName = document.getElementById('timerName4').value;
+    startTimer(5 * 60, timerName);
 });
 
 document.getElementById('pomodoroDebug').addEventListener('click', function () {
-    startTimer(10);
+    const timerName = document.getElementById('timerName5').value;
+    startTimer(10, timerName);
 });
 
 // Event listener for visibility change
@@ -204,7 +210,7 @@ document.getElementById('cancelTimer').addEventListener('click', function () {
     pauseTimer();
 });
 
-function addToLog(duration) {
+function addToLog(duration, timerName) {
     const log = document.getElementById('log');
     const listItem = document.createElement('div');
 
@@ -225,7 +231,7 @@ function addToLog(duration) {
     });
 
     // Append the delete button and log text to the log entry
-    listItem.textContent = `Timer started at ${startTimeString} for ${durationMinutes} minutes`;
+    listItem.textContent = `${timerName} started at ${startTimeString} for ${durationMinutes} minutes`;
     listItem.appendChild(deleteButton);
 
     log.appendChild(listItem);
@@ -239,6 +245,7 @@ function addToLog(duration) {
 //TODO: reduce copypaste 
 //TODO: delete button is ugly do something with it 
 document.getElementById('addSeparator').addEventListener('click', function() {
+    const timerName = document.getElementById('separatorName').value;
     const log = document.getElementById('log');
     const listItem = document.createElement('div');
 
@@ -255,6 +262,7 @@ document.getElementById('addSeparator').addEventListener('click', function() {
     });
 
     // Append the delete button to the empty log entry
+    listItem.textContent = `${timerName}`;
     listItem.appendChild(deleteButton);
 
     log.appendChild(listItem);
