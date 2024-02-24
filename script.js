@@ -17,6 +17,35 @@ let alertSoundBuffer;
 let alertInterval;
 let volume = 0.5; // Initial volume level
 
+// Define links to different icons
+const faviconStoped = 'tea.png';
+const faviconRunning = 'clock_red.png';
+const faviconWaitingForStop = 'clock_yellow.png';
+
+// Function to change the favicon
+function changeFavicon(icon) {
+    document.getElementById('favicon').href = icon;
+}
+
+// Example of changing the favicon based on status
+function updateFavicon() {
+    switch (timerState) {
+        case 'RUNNING':
+            changeFavicon(faviconRunning);
+            break;
+        case 'STOPPED':
+            changeFavicon(faviconStoped);
+            break;
+        case 'WAITING_FOR_STOP':
+            changeFavicon(faviconWaitingForStop);
+        default:
+            changeFavicon(faviconStoped);
+    }
+}
+
+// Call this function to update the favicon at the desired moment
+updateFavicon(); // Example: changing favicon to "running" icon
+
 // Function to save volume level to cookie
 function saveVolumeToCookie(volume) {
     document.cookie = `volume=${volume};expires=Fri, 31 Dec 9999 23:59:59 GMT;path=/`;
@@ -67,7 +96,7 @@ function startTimer(seconds) {
 
     console.log('Timer started:', seconds, 'seconds');
     timerState = TimerState.RUNNING;
-    updateCancelButtonState();
+    updState();
     addToLog(seconds);
     console.log('Timer state:', timerState);
 
@@ -104,9 +133,10 @@ function startTimer(seconds) {
     }
 }
 
-function updateCancelButtonState() {
+function updState() {
     const cancelButton = document.getElementById('cancelTimer');
     cancelButton.disabled = (timerState === TimerState.STOPPED);
+    updateFavicon()
 }
 
 function pauseTimer() {
@@ -117,7 +147,7 @@ function pauseTimer() {
     console.log('Timer state:', timerState);
     let timerDisplay = document.getElementById('timer');
     timerDisplay.textContent = "00:00";
-    updateCancelButtonState();
+    updState();
 }
 
 document.getElementById('pomodoro25').addEventListener('click', function () {
@@ -236,4 +266,4 @@ document.getElementById('addSeparator').addEventListener('click', function() {
 
 
 
-updateCancelButtonState(); // Set cancel button state on page load
+updState(); // Set cancel button state on page load
