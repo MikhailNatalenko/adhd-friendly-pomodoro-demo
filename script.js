@@ -9,7 +9,6 @@ const colors = ['#FFFFCC', '#CCFFFF', '#FFE5CC', '#CCFFE5', '#FFFFE5'];
 
 let colorIndex = 0; // Index of the current color
 
-
 let timerState = TimerState.STOPPED;
 let timeLeft = 0;
 let timerInterval;
@@ -68,8 +67,8 @@ function startTimer(seconds) {
 
     console.log('Timer started:', seconds, 'seconds');
     timerState = TimerState.RUNNING;
-    updateCancelButtonState()
-    addToLog(seconds)
+    updateCancelButtonState();
+    addToLog(seconds);
     console.log('Timer state:', timerState);
 
     updateTimer();
@@ -105,12 +104,10 @@ function startTimer(seconds) {
     }
 }
 
-
 function updateCancelButtonState() {
     const cancelButton = document.getElementById('cancelTimer');
     cancelButton.disabled = (timerState === TimerState.STOPPED);
 }
-
 
 function pauseTimer() {
     clearInterval(timerInterval);
@@ -120,7 +117,7 @@ function pauseTimer() {
     console.log('Timer state:', timerState);
     let timerDisplay = document.getElementById('timer');
     timerDisplay.textContent = "00:00";
-    updateCancelButtonState(); // Обновляем состояние кнопки "Отмена"
+    updateCancelButtonState();
 }
 
 document.getElementById('pomodoro25').addEventListener('click', function () {
@@ -187,15 +184,12 @@ function addToLog(duration) {
 
     listItem.style.backgroundColor = colors[colorIndex]; // Set background color from the array
 
-
     listItem.textContent = `Timer started at ${startTimeString} for ${durationMinutes} minutes`;
     log.appendChild(listItem);
     log.scrollTop = log.scrollHeight;
 
     // Increase the color index to choose the next color from the array
     colorIndex = (colorIndex + 1) % colors.length;
-
 }
 
-
-updateCancelButtonState(); // Устанавливаем состояние кнопки "Отмена" при загрузке страницы
+updateCancelButtonState(); // Set cancel button state on page load
