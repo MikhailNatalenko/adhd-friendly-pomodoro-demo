@@ -278,7 +278,60 @@ document.getElementById('addSeparator').addEventListener('click', function() {
 });
 
 
+// Функция для сохранения текста поля ввода в локальном хранилище
+function saveInputTextToLocalStorage(inputId) {
+    const inputElement = document.getElementById(inputId);
+    if (inputElement) {
+        const inputValue = inputElement.value;
+        localStorage.setItem(inputId, inputValue);
+    }
+}
 
+// Функция для загрузки текста поля ввода из локального хранилища
+function loadInputTextFromLocalStorage(inputId) {
+    const inputValue = localStorage.getItem(inputId);
+    if (inputValue !== null) {
+        const inputElement = document.getElementById(inputId);
+        if (inputElement) {
+            inputElement.value = inputValue;
+        }
+    }
+}
+
+// Загружаем текст из локального хранилища при загрузке страницы
+window.addEventListener('load', function() {
+    loadInputTextFromLocalStorage('timerName1');
+    loadInputTextFromLocalStorage('timerName2');
+    loadInputTextFromLocalStorage('timerName3');
+    loadInputTextFromLocalStorage('timerName4');
+    loadInputTextFromLocalStorage('timerName5');
+    loadInputTextFromLocalStorage('separatorName');
+});
+
+// Добавляем обработчики событий для сохранения текста в локальном хранилище при изменении содержимого полей ввода
+document.getElementById('timerName1').addEventListener('input', function () {
+    saveInputTextToLocalStorage('timerName1');
+});
+
+document.getElementById('timerName2').addEventListener('input', function () {
+    saveInputTextToLocalStorage('timerName2');
+});
+
+document.getElementById('timerName3').addEventListener('input', function () {
+    saveInputTextToLocalStorage('timerName3');
+});
+
+document.getElementById('timerName4').addEventListener('input', function () {
+    saveInputTextToLocalStorage('timerName4');
+});
+
+document.getElementById('timerName5').addEventListener('input', function () {
+    saveInputTextToLocalStorage('timerName5');
+});
+
+document.getElementById('separatorName').addEventListener('input', function () {
+    saveInputTextToLocalStorage('separatorName');
+});
 
 
 
