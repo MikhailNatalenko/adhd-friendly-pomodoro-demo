@@ -74,9 +74,13 @@ button {
     margin-left: 10px;
 }
 
-/* Display the circle on hover over the cross */
-.log div:hover span.deleteButton  {
-    visibility: visible;
+.log-item-container:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
 }
 
+/* Display the circle on hover over the log item */
+.log div:hover span.deleteButton  {
+    visibility: visible;
+} 
 

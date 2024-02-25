@@ -213,13 +213,21 @@ document.getElementById('cancelTimer').addEventListener('click', function () {
 function addToLog(duration, timerName) {
     const log = document.getElementById('log');
     const listItem = document.createElement('div');
+    listItem.setAttribute("class", "log-item-container");
 
     const startDate = new Date();
     const startTimeString = `${startDate.getHours()}:${startDate.getMinutes()}:${startDate.getSeconds()}`;
     const durationMinutes = Math.floor(duration / 60);
 
-    listItem.style.backgroundColor = colors[colorIndex];
-
+    const backgroundColor = colors[colorIndex];
+    listItem.style.backgroundColor = backgroundColor;
+    listItem.addEventListener('mouseenter', function() {
+        this.style.backgroundColor = '#f0f0f0';
+    });
+    
+    listItem.addEventListener('mouseleave', function() {
+        this.style.backgroundColor = backgroundColor;
+    });
     // Create a delete button (circle)
     const deleteButton = document.createElement('span');
     deleteButton.textContent = '×';
