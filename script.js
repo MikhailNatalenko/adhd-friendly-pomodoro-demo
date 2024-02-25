@@ -93,7 +93,7 @@ function startTimer(seconds, timerName) {
 
     let endTime = Date.now() + seconds * 1000;
     timeLeft = seconds;
-
+    
     console.log('Timer started:', seconds, 'seconds');
     timerState = TimerState.RUNNING;
     updState();
@@ -137,6 +137,11 @@ function updState() {
     const cancelButton = document.getElementById('cancelTimer');
     cancelButton.disabled = (timerState === TimerState.STOPPED);
     updateFavicon()
+
+    const buttons = document.querySelectorAll('.options button');
+    buttons.forEach(button => {
+        button.disabled = (timerState != TimerState.STOPPED);
+    });
 }
 
 function pauseTimer() {
@@ -209,6 +214,7 @@ volumeRange.addEventListener('change', function() {
 document.getElementById('cancelTimer').addEventListener('click', function () {
     pauseTimer();
 });
+
 
 function addToLog(duration, timerName) {
     const log = document.getElementById('log');
